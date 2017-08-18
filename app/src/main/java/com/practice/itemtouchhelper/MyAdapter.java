@@ -49,6 +49,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             }
 
             @Override
+            public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
+                switch (actionState){
+                    case ItemTouchHelper.ACTION_STATE_DRAG:
+                        viewHolder.itemView.setBackgroundColor(0xFFABCDEF);
+                        break;
+                    case ItemTouchHelper.ACTION_STATE_SWIPE:
+                        viewHolder.itemView.setBackgroundColor(0xFFEFCDAB);
+                        break;
+                    default:
+                        break;
+
+                }
+                super.onSelectedChanged(viewHolder, actionState);
+            }
+
+            @Override
+            public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                super.clearView(recyclerView, viewHolder);
+                viewHolder.itemView.setBackgroundColor(0xFFFFFFFF);
+            }
+
+            @Override
             public boolean isLongPressDragEnabled() {
                 return true;
             }
