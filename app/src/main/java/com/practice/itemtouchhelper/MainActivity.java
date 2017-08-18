@@ -22,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         myAdapter = new MyAdapter();
-        mainRv.setAdapter(myAdapter);
         mainRv.setLayoutManager(linearLayoutManager);
+        myAdapter.setupWithRecyclerView(mainRv);
     }
+
+
 }
