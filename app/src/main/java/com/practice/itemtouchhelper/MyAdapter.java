@@ -22,15 +22,15 @@ import butterknife.ButterKnife;
  */
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    List<String> data = new LinkedList<>(Arrays.asList("Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10", "Item 11", "Item 12", "Item 13", "Item 14", "Item 15"));
+    List<String> data = new LinkedList<>(Arrays.asList("Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"));
     ItemTouchHelper itemTouchHelper;
 
     public MyAdapter() {
         itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
             @Override
             public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-                int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-                int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+                int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                int swipeFlags = 0;
                 return makeMovementFlags(dragFlags, swipeFlags);
             }
 
@@ -50,12 +50,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
             @Override
             public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
-                switch (actionState){
+                switch (actionState) {
                     case ItemTouchHelper.ACTION_STATE_DRAG:
                         viewHolder.itemView.setBackgroundColor(0xFFABCDEF);
-                        break;
-                    case ItemTouchHelper.ACTION_STATE_SWIPE:
-                        viewHolder.itemView.setBackgroundColor(0xFFEFCDAB);
                         break;
                     default:
                         break;
@@ -70,6 +67,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 viewHolder.itemView.setBackgroundColor(0xFFFFFFFF);
             }
 
+
+
+
             @Override
             public boolean isLongPressDragEnabled() {
                 return true;
@@ -77,7 +77,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
             @Override
             public boolean isItemViewSwipeEnabled() {
-                return true;
+                return false;
             }
         });
     }
